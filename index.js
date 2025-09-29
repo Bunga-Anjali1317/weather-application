@@ -63,14 +63,15 @@ searchBtn.addEventListener('click', async () => {
 
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
-        if (!response.ok) throw new Error('City not found');    
+        if (!response.ok) throw new Error('City not found');
+        if (searchBarEle.value == "") throw new Error('Please enter City Name');
         const data = await response.json();
         console.log(data);
         displayWeather(data);
         searchBarEle.value = '';
 
     } catch (error) {
-        console.log(error);
+        alert(error);
     }
 });
 function displayWeather(data) {
@@ -249,4 +250,5 @@ function showMap(lat, lon) {
     .openPopup();
 
 }
+
 
