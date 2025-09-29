@@ -87,6 +87,13 @@ function displayWeather(data) {
     let sunsetDate = new Date(sunset  * 1000);
     console.log(sunriseDate, sunsetDate);
 
+    // Format to hh:mm AM/PM
+    let options = { hour: '2-digit', minute: '2-digit' };
+
+    let sunriseTime = sunriseDate.toLocaleTimeString([], options);
+    let sunsetTime = sunsetDate.toLocaleTimeString([], options);
+    console.log(sunriseTime, sunsetTime);
+
     let sunrisedDate = new Date((sunrise + timezone ) * 1000)
     // Format (Day, Month, Year)
     let formattedDate = sunrisedDate.toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' });
@@ -121,11 +128,11 @@ function displayWeather(data) {
             </div>
             <div class="condition">
                 <p><i class="fa-solid fa-sun"></i> Sunrise</p>
-                <h3>${sunriseDate}</h3>
+                <h3>${sunriseTime}</h3>
             </div>
             <div class="condition">
                 <p><i class="fa-solid fa-moon"></i> Sunset</p>
-                <h3>${sunsetDate}</h3>
+                <h3>${sunsetTime}</h3>
             </div>  
             <div class="condition">
                 <p><i class="fa-solid fa-temperature-three-quarters"></i> Feels Like</p>
@@ -242,3 +249,4 @@ function showMap(lat, lon) {
     .openPopup();
 
 }
+
