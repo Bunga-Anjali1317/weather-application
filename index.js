@@ -83,19 +83,13 @@ function displayWeather(data) {
     const { lon, lat } = data.coord;
 
     // Convert to ms for JS Date
-    let sunriseDate = new Date((sunrise + timezone) * 1000);
-    let sunsetDate = new Date((sunset + timezone) * 1000);
+    let sunriseDate = new Date(sunrise  * 1000);
+    let sunsetDate = new Date(sunset  * 1000);
     console.log(sunriseDate, sunsetDate);
 
-    // Format to hh:mm AM/PM
-    let options = { hour: '2-digit', minute: '2-digit' };
-
-    let sunriseTime = sunriseDate.toLocaleTimeString([], options);
-    let sunsetTime = sunsetDate.toLocaleTimeString([], options);
-    console.log(sunriseTime, sunsetTime);
-
+    let sunrisedDate = new Date((sunrise + timezone ) * 1000)
     // Format (Day, Month, Year)
-    let formattedDate = sunriseDate.toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' });
+    let formattedDate = sunrisedDate.toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' });
     weatherContainer.classList.remove('displayed');
 
     console.log(formattedDate);
@@ -127,11 +121,11 @@ function displayWeather(data) {
             </div>
             <div class="condition">
                 <p><i class="fa-solid fa-sun"></i> Sunrise</p>
-                <h3>${sunriseTime}</h3>
+                <h3>${sunriseDate}</h3>
             </div>
             <div class="condition">
                 <p><i class="fa-solid fa-moon"></i> Sunset</p>
-                <h3>${sunsetTime}</h3>
+                <h3>${sunsetDate}</h3>
             </div>  
             <div class="condition">
                 <p><i class="fa-solid fa-temperature-three-quarters"></i> Feels Like</p>
@@ -246,4 +240,5 @@ function showMap(lat, lon) {
   L.marker([lat, lon]).addTo(window.markerLayer)
     .bindPopup(`📍 ${lat.toFixed(2)}, ${lon.toFixed(2)}`)
     .openPopup();
+
 }
